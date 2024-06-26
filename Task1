@@ -1,0 +1,42 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+struct Question {
+    string text;
+    vector<string> answers;
+    int correct;
+};
+
+int main() {
+    vector<Question> questions = {
+        {"What is the capital of France?", {"Paris", "London", "Berlin", "Rome"}, 0},
+        {"What is the largest planet in our solar system?", {"Earth", "Saturn", "Jupiter", "Uranus"}, 2},
+        {"Which of the following is not a primary color?", {"Red", "Blue", "Yellow", "Green"}, 3}
+    };
+
+    int score = 0;
+
+    for (const auto& question : questions) {
+        cout << question.text << endl;
+        for (int i = 0; i < question.answers.size(); ++i) {
+            cout << (i + 1) << ". " << question.answers[i] << endl;
+        }
+        int user_answer;
+        cout << "Enter the number of your answer: ";
+        cin >> user_answer;
+        --user_answer; // adjust for 0-based indexing
+        if (user_answer == question.correct) {
+            cout << "Correct!" << endl;
+            ++score;
+        } else {
+            cout << "Sorry, the correct answer is " << question.answers[question.correct] << endl;
+        }
+    }
+
+    cout << "Game over! Your final score is " << score << " out of " << questions.size() << endl;
+
+    return 0;
+}
